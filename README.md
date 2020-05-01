@@ -28,6 +28,11 @@ https://blogs.gnome.org/ignatenko/2015/07/31/how-to-set-up-network-audio-server-
 https://wiki.openlab-augsburg.de/Musikanlage
 #
 https://askubuntu.com/questions/895376/pulseaudio-streaming-over-network-not-working
+# 
+# https://wiki.archlinux.org/index.php/PulseAudio/Examples#Set_default_input_source
+# 
+# https://ubuntuforums.org/showthread.php?p=4928900
+
 ```
 
 # device setting for orange-pi-zero
@@ -82,22 +87,22 @@ systemctl --user restart pulseaudio || pkill pulseaudio
 systemctl --user satus pulseaudio 
 # set 
 loginctl enable-linger media
-# 
-
-# status
-ps -C pulseaudio
-
+# check pulseaudio run under user media
+ps -ef |grep pulse
 ```
 
 ## control loudspeaker volumes
 
 ```bash
 # max volumes
-/usr/bin/amixer set 'Line Out' 100% unmutess
+# /usr/bin/amixer set '<controls' 90% unmute
+/usr/bin/amixer set 'Master' 90% unmute
 # NEVER use 100% of any technical device :-)
 # better
 # max volumes
-/usr/bin/amixer set 'Line Out' 90% unmute
+/usr/bin/amixer set 'Master' 90% unmute
+# found control 
+/usr/bin/amixer
 ```
 
 ## pactl - Control a running PulseAudio sound server
@@ -120,8 +125,8 @@ pactl info
 pactl list
 ```
 
-# https://wiki.archlinux.org/index.php/PulseAudio/Examples#Set_default_input_source
-# https://ubuntuforums.org/showthread.php?p=4928900
+
+## mixer system width
 
 ```bash
 alsamixer -Dhw
@@ -133,11 +138,18 @@ alsamixer -Dhw
 aplay -D plughw:0,0 /usr/share/sounds/alsa/Front_Center.wav
 ```
 
+## check sound card run under right user 
 
+- in our case under user media 
 
 sudo fuser -v /dev/dsp* /dev/snd/*
 
+
+## list of ALSA devices
+
 aplay -l # list of device
+
+## user store pulseaudio config
 
 ~/.config/pulse
 
@@ -151,4 +163,10 @@ pulseaudio -k && sleep 3 && pulseaudio -vv
 
 ```bash
 pulseaudio -k
+```
+
+## start pulseaudio
+
+```bash
+pulseaudio --start
 ```
