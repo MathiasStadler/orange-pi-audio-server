@@ -33,4 +33,14 @@ https://askubuntu.com/questions/895376/pulseaudio-streaming-over-network-not-wor
 ## install
 
 ```bash
+# debian
+sudo apt-get install pulseaudio-module-zeroconf pulseaudio  avahi-daemon
+# add to config
+echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;192.168.0.0/24" |sudo tee -a  /etc/pulse/system.pa
+echo " load-module module-zeroconf-publish" |sudo tee -a  /etc/pulse/system.pa  
+# restart pulseaudio
+systemctl --user restart pulseaudio || pkill pulseaudio
+# status
+
+
 ```
