@@ -36,7 +36,6 @@ https://askubuntu.com/questions/895376/pulseaudio-streaming-over-network-not-wor
 
 - prepare backup
 
-
 ```bash
 sudo cp /boot/armbianEnv.txt /boot/armbianEnv_org_install.txt
 ```
@@ -58,11 +57,15 @@ sudo shutdown -Fr now
 
 ```bash
 # debian
-sudo apt-get install -y pulseaudio-module-zeroconf pulseaudio  avahi-daemon alsa-utils
+sudo apt-get install -y pulseaudio-module-zeroconf pulseaudio  avahi-daemon alsa-utils paprefs 
 # add to config
-echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;192.168.0.0/24 auth-anonymous=1" |sudo tee -a  /etc/pulse/system.pa
-echo " load-module module-zeroconf-publish" |sudo tee -a  /etc/pulse/system.pa  
+echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;192.168.178.0/24 auth-anonymous=1" |sudo tee -a  /etc/pulse/default.pa
+echo " load-module module-zeroconf-publish" |sudo tee -a  /etc/pulse/default.pa  
 
+# start avahi
+systemctl start avahi-daemon
+# enable avahi
+systemctl enable avahi-daemon
 # user for pulseaudio
 useradd -m -G audio media -s /bin/bash
 # switch to user
