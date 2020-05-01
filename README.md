@@ -23,7 +23,7 @@ https://github.com/TheBiggerGuy/docker-pulseaudio-example/blob/master/pulse-clie
 #
 https://blogs.gnome.org/ignatenko/2015/07/31/
 #
-how-to-set-up-network-audio-server-based-on-pulseaudio-and-auto-discovered-via-avahi/
+https://blogs.gnome.org/ignatenko/2015/07/31/how-to-set-up-network-audio-server-based-on-pulseaudio-and-auto-discovered-via-avahi/
 #
 https://wiki.openlab-augsburg.de/Musikanlage
 #
