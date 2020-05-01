@@ -98,7 +98,7 @@ sudo shutdown -Fr now
 ```
 
 
-## install
+## install server 
 
 ```bash
 # debian
@@ -118,10 +118,9 @@ sudo su - media
 # set env for D-BUS
 # Failed to connect to bus: No such file or directory
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
-# set permanne
 # enable
 systemctl --user enable pulseaudio.service
-# restart pulseaudio
+# restart pulseaudio and delete all instance
 systemctl --user restart pulseaudio || pkill pulseaudio
 # restart pulseaudio
 systemctl --user satus pulseaudio 
@@ -131,7 +130,18 @@ loginctl enable-linger media
 ps -ef |grep pulse
 ```
 
-## control loudspeaker volumes
+## install client
+
+- use tool pavucontrol
+
+- install
+
+```bash
+sudo apt-get install pavucontrol
+```
+
+
+## control loudspeaker volumes server side
 
 ```bash
 # max volumes
